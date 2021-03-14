@@ -14,6 +14,11 @@
         to load the system-specific libraries, the Expression Engine and the 
         common classes used pretty much everywhere in the app.
     </description>
+
+    <scm>
+        <connection>scm:git:git://github.com/journeyman88/alea-iacta-core</connection>
+        <url>https://github.com/journeyman88/alea-iacta-core</url>
+    </scm>
     
     <repositories>
         <repository>
