@@ -18,9 +18,9 @@ package net.unknowndomain.alea.systems;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.ServiceLoader;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 import net.unknowndomain.alea.command.Command;
-import net.unknowndomain.alea.messages.ReturnMsg;
 import net.unknowndomain.alea.roll.GenericResult;
 import net.unknowndomain.alea.roll.GenericRoll;
 import net.unknowndomain.alea.roll.StatefulRoll;
@@ -41,7 +41,7 @@ public abstract class RpgSystemCommand extends Command
      */
     public static final ServiceLoader<RpgSystemCommand> LOADER = ServiceLoader.load(RpgSystemCommand.class);
     
-    private static final Cache<Long, GenericResult> RESULT_CACHE = new Cache2kBuilder<Long, GenericResult>() {}
+    private static final Cache<UUID, GenericResult> RESULT_CACHE = new Cache2kBuilder<UUID, GenericResult>() {}
             .expireAfterWrite(2, TimeUnit.MINUTES)
             .build();
     
@@ -93,14 +93,14 @@ public abstract class RpgSystemCommand extends Command
      */
     public abstract RpgSystemOptions buildOptions();
     
-    public Optional<ReturnMsg> execCommand(RpgSystemOptions options, Optional<Long> callerId)
+    public Optional<GenericResult> execCommand(RpgSystemOptions options, Optional<UUID> callerId)
     {
         return execCommand(options, Locale.ENGLISH, callerId);
     }
     
-    public Optional<ReturnMsg> execCommand(RpgSystemOptions options, Locale lang, Optional<Long> callerId)
+    public Optional<GenericResult> execCommand(RpgSystemOptions options, Locale lang, Optional<UUID> callerId)
     {
-        Optional<ReturnMsg> retVal = Optional.empty();
+        Optional<GenericResult> retVal = Optional.empty();
         if (options.isValid())
         {
             Optional<GenericRoll> parsedRoll = safeCommand(options, lang);
@@ -110,7 +110,7 @@ public abstract class RpgSystemCommand extends Command
                 GenericResult result = null;
                 if (callerId.isPresent())
                 {
-                    Long id = callerId.get();
+                    UUID id = callerId.get();
                     if (RESULT_CACHE.containsKey(id))
                     {
                         result = RESULT_CACHE.peek(id);
@@ -128,10 +128,10 @@ public abstract class RpgSystemCommand extends Command
                 result = roll.getResult();
                 if (callerId.isPresent())
                 {
-                    Long id = callerId.get();
+                    UUID id = callerId.get();
                     RESULT_CACHE.put(id, result);
                 }
-                retVal = Optional.of(result.getMessage());
+                retVal = Optional.ofNullable(result);
             }
         }
         return retVal;

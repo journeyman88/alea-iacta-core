@@ -16,6 +16,7 @@
 package net.unknowndomain.alea.command;
 
 import java.util.Optional;
+import java.util.UUID;
 import net.unknowndomain.alea.messages.ReturnMsg;
 
 /**
@@ -34,10 +35,10 @@ public abstract class BasicCommand extends Command
      * can be interpreted by the implementation.
      * 
      * @param cmdLine The commandline which is interpreted by the implementation
-     * @param callerId An Optional that may contain a caller id number, used for rerolls.
+     * @param callerId An Optional that may contain a caller id UUID, used for rerolls.
      * @return The return message wrapper which contains the command results.
      * @see ReturnMsg
      * @see Optional
      */
-    public abstract ReturnMsg execCommand(String cmdLine, Optional<Long> callerId);
+    public abstract ReturnMsg execCommand(String cmdLine, Optional<UUID> callerId);
 }

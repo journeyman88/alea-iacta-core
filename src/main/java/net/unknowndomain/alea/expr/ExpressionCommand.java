@@ -17,6 +17,7 @@ package net.unknowndomain.alea.expr;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.regex.Matcher;
 import net.unknowndomain.alea.command.BasicCommand;
 import net.unknowndomain.alea.messages.MsgBuilder;
@@ -37,7 +38,7 @@ public class ExpressionCommand extends BasicCommand
     }
 
     @Override
-    public ReturnMsg execCommand(String cmdLine, Optional<Long> callerId)
+    public ReturnMsg execCommand(String cmdLine, Optional<UUID> callerId)
     {
         MsgBuilder retVal = new MsgBuilder();
         Matcher prefixMatcher = PREFIX.matcher(cmdLine);
