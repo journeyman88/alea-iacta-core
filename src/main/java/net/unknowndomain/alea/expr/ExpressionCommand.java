@@ -15,11 +15,12 @@
  */
 package net.unknowndomain.alea.expr;
 
-import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import net.unknowndomain.alea.command.BasicCommand;
+import net.unknowndomain.alea.command.PrintableOutput;
 import net.unknowndomain.alea.messages.MsgBuilder;
 import net.unknowndomain.alea.messages.MsgStyle;
 import net.unknowndomain.alea.messages.ReturnMsg;
@@ -38,17 +39,13 @@ public class ExpressionCommand extends BasicCommand
     }
 
     @Override
-    public ReturnMsg execCommand(String cmdLine, Optional<UUID> callerId)
+    public Optional<PrintableOutput> execCommand(String cmdLine, Optional<UUID> callerId)
     {
-        MsgBuilder retVal = new MsgBuilder();
+        Optional<PrintableOutput> retVal = Optional.empty();
         Matcher prefixMatcher = PREFIX.matcher(cmdLine);
         if (prefixMatcher.matches())
         {
-            if (cmdLine.contains(CMD_HELP) || cmdLine.contains("-h"))
-            {
-                return printHelp();
-            }
-            else
+            if (!(cmdLine.contains(CMD_HELP) || cmdLine.contains("-h")))
             {
                 boolean verbose = false;
                 String params = prefixMatcher.group(CMD_PARAMS);
@@ -58,28 +55,16 @@ public class ExpressionCommand extends BasicCommand
                     params = params.replaceAll("-v", "");
                 }
                 Expression solver = new Expression(params);
-                List<ExpResult> results = solver.getResults();
-                int total = 0;
-                for (ExpResult res : results)
-                {
-                    total += res.getResult();
-                }
-                retVal.append(params).append(" = ").append(total, MsgStyle.BOLD);
-                if (verbose)
-                {
-                    retVal.appendNewLine();
-                    for (ExpResult res : results)
-                    {
-                        res.formatVerbose(retVal);
-                    }
-                    
-                }
+                ExpressionResult result = solver.getResult();
+                result.setVerbose(verbose);
+                retVal = Optional.of(result);
             }
         }
-        return retVal.build();
+        return retVal;
     }
     
-    public ReturnMsg printHelp()
+    @Override
+    public ReturnMsg printHelp(Locale lang)
     {
         MsgBuilder retVal = new MsgBuilder();
         retVal.append("Expression Engine (expr) Help", MsgStyle.BOLD, MsgStyle.UNDERLINE).append("\n").append("\n");

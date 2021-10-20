@@ -19,13 +19,14 @@ import java.util.UUID;
 import net.unknowndomain.alea.messages.MsgBuilder;
 import net.unknowndomain.alea.messages.ReturnMsg;
 import org.apache.commons.lang3.StringUtils;
+import net.unknowndomain.alea.command.PrintableOutput;
 
 /**
  * This is a common result base-class to be extended by system specific classes.
  * 
  * @author journeyman
  */
-public abstract class GenericResult
+public abstract class GenericResult implements PrintableOutput
 {
     private boolean verbose;
     private final String uuid = UUID.randomUUID().toString();

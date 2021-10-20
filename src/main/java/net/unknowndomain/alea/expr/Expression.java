@@ -15,6 +15,14 @@
  */
 package net.unknowndomain.alea.expr;
 
+import net.unknowndomain.alea.expr.parts.DropPart;
+import net.unknowndomain.alea.expr.parts.PartResult;
+import net.unknowndomain.alea.expr.parts.UpperPart;
+import net.unknowndomain.alea.expr.parts.KeepPart;
+import net.unknowndomain.alea.expr.parts.SimplePart;
+import net.unknowndomain.alea.expr.parts.ExpPart;
+import net.unknowndomain.alea.expr.parts.LowerPart;
+import net.unknowndomain.alea.expr.parts.ModPart;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -97,14 +105,19 @@ public class Expression
         return sb.toString();
     }
     
-    public List<ExpResult> getResults()
+    public List<PartResult> getResults()
     {
-        List<ExpResult> result = new ArrayList<>(parts.size());
+        List<PartResult> result = new ArrayList<>(parts.size());
         for (ExpPart p : parts)
         {
             result.add(p.getResult());
         }
         return result;
+    }
+    
+    public ExpressionResult getResult()
+    {
+        return new ExpressionResult(getExpression(), getResults());
     }
     
 }

@@ -15,6 +15,7 @@
  */
 package net.unknowndomain.alea.command;
 
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import net.unknowndomain.alea.messages.ReturnMsg;
@@ -40,5 +41,6 @@ public abstract class BasicCommand extends Command
      * @see ReturnMsg
      * @see Optional
      */
-    public abstract ReturnMsg execCommand(String cmdLine, Optional<UUID> callerId);
+    public abstract Optional<PrintableOutput> execCommand(String cmdLine, Optional<UUID> callerId);
+    public abstract ReturnMsg printHelp(Locale lang);
 }

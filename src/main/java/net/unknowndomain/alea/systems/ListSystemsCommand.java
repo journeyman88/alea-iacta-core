@@ -17,9 +17,12 @@ package net.unknowndomain.alea.systems;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
 import net.unknowndomain.alea.command.BasicCommand;
+import net.unknowndomain.alea.command.PrintableOutput;
+import net.unknowndomain.alea.command.SimpleOutput;
 import net.unknowndomain.alea.messages.MsgBuilder;
 import net.unknowndomain.alea.messages.MsgStyle;
 import net.unknowndomain.alea.messages.ReturnMsg;
@@ -40,7 +43,7 @@ public class ListSystemsCommand extends BasicCommand
     }
 
     @Override
-    public ReturnMsg execCommand(String cmdLine, Optional<UUID> callerId)
+    public Optional<PrintableOutput> execCommand(String cmdLine, Optional<UUID> callerId)
     {
         MsgBuilder output = new MsgBuilder();
         List<RpgSystemDescriptor> desc = new ArrayList<>();
@@ -65,7 +68,14 @@ public class ListSystemsCommand extends BasicCommand
                     append(" | ").append(d.getCommand()).append(" ]\n");
         }
         output.append(sb.toString(), MsgStyle.CODE);
-        return output.build();
+        return Optional.of(new SimpleOutput(output.build()));
+    }
+
+    @Override
+    public ReturnMsg printHelp(Locale lang)
+    {
+        MsgBuilder msgBuilder = new MsgBuilder();
+        return msgBuilder.build();
     }
     
 }
