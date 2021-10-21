@@ -15,6 +15,9 @@
  */
 package net.unknowndomain.alea.expr.parts;
 
+import net.unknowndomain.alea.expr.results.PartResult;
+import net.unknowndomain.alea.expr.results.PlainResult;
+
 /**
  *
  * @author journeyman
@@ -33,7 +36,7 @@ public class ModPart extends ExpPart
     @Override
     public PartResult getResult()
     {
-        PartResult res = new PartResult();
+        PlainResult res = new PlainResult();
         res.setExpr(getExpr());
         res.setResult(modifier);
         return res;

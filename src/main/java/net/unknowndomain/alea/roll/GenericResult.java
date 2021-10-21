@@ -36,7 +36,8 @@ public abstract class GenericResult implements PrintableOutput
      * 
      * @return the message-wrapped formatted result.
      */
-    public ReturnMsg getMessage()
+    @Override
+    public ReturnMsg buildMessage()
     {
         MsgBuilder msg = new MsgBuilder();
         formatResults(msg, verbose, 0);

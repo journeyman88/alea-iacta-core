@@ -23,5 +23,5 @@ import net.unknowndomain.alea.messages.ReturnMsg;
  */
 public interface PrintableOutput
 {
-    public ReturnMsg getMessage();
+    public ReturnMsg buildMessage();
 }

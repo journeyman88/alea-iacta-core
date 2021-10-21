@@ -16,7 +16,7 @@
 package net.unknowndomain.alea.expr;
 
 import net.unknowndomain.alea.expr.parts.DropPart;
-import net.unknowndomain.alea.expr.parts.PartResult;
+import net.unknowndomain.alea.expr.results.PartResult;
 import net.unknowndomain.alea.expr.parts.UpperPart;
 import net.unknowndomain.alea.expr.parts.KeepPart;
 import net.unknowndomain.alea.expr.parts.SimplePart;

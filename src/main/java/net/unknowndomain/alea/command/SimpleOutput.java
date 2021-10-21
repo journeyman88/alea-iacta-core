@@ -31,7 +31,7 @@ public class SimpleOutput implements PrintableOutput
     }
 
     @Override
-    public ReturnMsg getMessage()
+    public ReturnMsg buildMessage()
     {
         return message;
     }

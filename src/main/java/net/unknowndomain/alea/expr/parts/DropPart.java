@@ -15,9 +15,11 @@
  */
 package net.unknowndomain.alea.expr.parts;
 
+import net.unknowndomain.alea.expr.results.PartResult;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import net.unknowndomain.alea.expr.results.SuccessResult;
 import net.unknowndomain.alea.random.SingleResult;
 
 /**
@@ -42,7 +44,7 @@ public class DropPart extends DicePart
     public PartResult getResult()
     {
         int sum = 0;
-        PartResult res = new PartResult();
+        SuccessResult res = new SuccessResult();
         res.setExpr(getExpr());
         List<SingleResult<Integer>> results = dicePool.getResults();
         results.sort((SingleResult<Integer> o1, SingleResult<Integer> o2) ->

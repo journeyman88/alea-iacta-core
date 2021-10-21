@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 Marco Bignami.
+ * Copyright 2020 journeyman.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,35 +13,38 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.unknowndomain.alea.expr.parts;
+package net.unknowndomain.alea.expr.results;
 
-import net.unknowndomain.alea.expr.results.PartResult;
+import net.unknowndomain.alea.messages.MsgBuilder;
 
 /**
  *
  * @author journeyman
  */
-public abstract class ExpPart
+public abstract class PartResult
 {
-    private final boolean positive;
-    private final String part;
-    
-    protected ExpPart(String exp)
-    {
-        positive = !exp.startsWith("-");
-        part = exp;
-    }
-    
-    public abstract PartResult getResult();
+    private Integer result;
+    private String expr;
 
-    public boolean isPositive()
+    public abstract void formatVerbose(MsgBuilder msgBuilder);
+    
+    public Integer getResult()
     {
-        return positive;
+        return result;
+    }
+
+    public void setResult(Integer result)
+    {
+        this.result = result;
     }
 
     public String getExpr()
     {
-        return part;
+        return expr;
     }
-    
+
+    public void setExpr(String expr)
+    {
+        this.expr = expr;
+    }
 }

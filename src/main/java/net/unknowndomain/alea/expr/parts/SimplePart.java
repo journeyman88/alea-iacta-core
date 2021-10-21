@@ -15,6 +15,8 @@
  */
 package net.unknowndomain.alea.expr.parts;
 
+import net.unknowndomain.alea.expr.results.DiceResult;
+import net.unknowndomain.alea.expr.results.PartResult;
 import net.unknowndomain.alea.random.SingleResult;
 
 /**
@@ -31,13 +33,13 @@ public class SimplePart extends DicePart
     @Override
     public PartResult getResult()
     {
-        PartResult res = new PartResult();
+        DiceResult res = new DiceResult();
         res.setExpr(getExpr());
         int sum = 0;
         for (SingleResult<Integer> rs : dicePool.getResults())
         {
             sum += rs.getValue();
-            res.getValidResults().add(rs);
+            res.getResults().add(rs);
         }
         res.setResult((isPositive() ? 1 : -1) * sum);
         return res;

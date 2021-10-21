@@ -17,7 +17,7 @@ package net.unknowndomain.alea.expr;
 
 import java.util.List;
 import net.unknowndomain.alea.command.PrintableOutput;
-import net.unknowndomain.alea.expr.parts.PartResult;
+import net.unknowndomain.alea.expr.results.PartResult;
 import net.unknowndomain.alea.messages.MsgBuilder;
 import net.unknowndomain.alea.messages.MsgStyle;
 import net.unknowndomain.alea.messages.ReturnMsg;
@@ -39,7 +39,7 @@ public class ExpressionResult implements PrintableOutput
     }
 
     @Override
-    public ReturnMsg getMessage()
+    public ReturnMsg buildMessage()
     {
         MsgBuilder retVal = new MsgBuilder();
         int total = 0;

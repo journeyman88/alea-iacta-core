@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 journeyman.
+ * Copyright 2021 m.bignami.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package net.unknowndomain.alea.expr.parts;
+package net.unknowndomain.alea.expr.results;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import net.unknowndomain.alea.messages.MsgBuilder;
 import net.unknowndomain.alea.messages.MsgStyle;
@@ -23,19 +23,18 @@ import net.unknowndomain.alea.random.SingleResult;
 
 /**
  *
- * @author journeyman
+ * @author m.bignami
  */
-public class PartResult
+public class SuccessResult extends PartResult
 {
-    private Integer result;
-    private String expr;
-    private List<SingleResult<Integer>> validResults = new ArrayList<>();
-    private List<SingleResult<Integer>> discardedResults = new ArrayList<>();
-
+    private List<SingleResult<Integer>> validResults = new LinkedList<>();
+    private List<SingleResult<Integer>> discardedResults = new LinkedList<>();
+    
+    @Override
     public void formatVerbose(MsgBuilder msgBuilder)
     {
         boolean v = !getValidResults().isEmpty();
-        boolean d = !getValidResults().isEmpty();
+        boolean d = !getDiscardedResults().isEmpty();
         if (v || d)
         {
             msgBuilder.append(getExpr());
@@ -76,25 +75,10 @@ public class PartResult
             msgBuilder.appendNewLine();
         }
     }
-    
-    public Integer getResult()
-    {
-        return result;
-    }
 
     public List<SingleResult<Integer>> getValidResults()
     {
         return validResults;
-    }
-
-    public List<SingleResult<Integer>> getDiscardedResults()
-    {
-        return discardedResults;
-    }
-
-    public void setResult(Integer result)
-    {
-        this.result = result;
     }
 
     public void setValidResults(List<SingleResult<Integer>> validResults)
@@ -102,18 +86,13 @@ public class PartResult
         this.validResults = validResults;
     }
 
+    public List<SingleResult<Integer>> getDiscardedResults()
+    {
+        return discardedResults;
+    }
+
     public void setDiscardedResults(List<SingleResult<Integer>> discardedResults)
     {
         this.discardedResults = discardedResults;
-    }
-
-    public String getExpr()
-    {
-        return expr;
-    }
-
-    public void setExpr(String expr)
-    {
-        this.expr = expr;
     }
 }
