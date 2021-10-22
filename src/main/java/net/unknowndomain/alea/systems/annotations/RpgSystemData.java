@@ -30,4 +30,6 @@ import java.lang.annotation.Target;
 public @interface RpgSystemData
 {
     public String bundleName();
+    public String [] groupsName() default {};
+    public String [] groupsDesc() default {};
 }

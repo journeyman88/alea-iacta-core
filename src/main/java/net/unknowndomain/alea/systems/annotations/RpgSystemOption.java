@@ -33,7 +33,7 @@ public @interface RpgSystemOption
     public String shortcode() default "";
     public String argName() default "";
     public String description() default "";
-    public int groupId() default -1;
-    public String groupDesc() default "";
+    public String groupName() default "";
     public boolean required() default false;
+    public boolean groupRequired() default false;
 }

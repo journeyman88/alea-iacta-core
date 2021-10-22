@@ -29,7 +29,12 @@ public abstract class ExpPart
     protected ExpPart(String exp)
     {
         positive = !exp.startsWith("-");
-        part = exp;
+        String prefix = "";
+        if ((positive) && !exp.startsWith("+"))
+        {
+            prefix += "+";
+        }
+        part = prefix + exp;
     }
     
     public abstract PartResult getResult();
