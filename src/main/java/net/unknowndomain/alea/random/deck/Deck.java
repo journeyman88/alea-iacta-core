@@ -25,21 +25,21 @@ import net.unknowndomain.alea.random.SingleResult;
  *
  * @author journeyman
  */
-public abstract class Deck implements Generator<String>
+public abstract class Deck<T> implements Generator<T>
 {
     public abstract String getName();
     
-    public abstract List<String> getContents();
+    public abstract List<T> getContents();
 
     @Override
-    public Optional<SingleResult<String>> nextResult()
+    public Optional<SingleResult<T>> nextResult()
     {
-        Optional<SingleResult<String>> retVal = Optional.empty();
+        Optional<SingleResult<T>> retVal = Optional.empty();
         if (!getContents().isEmpty())
         {
             Collections.shuffle(getContents());
-            String extract = getContents().remove(0);
-            SingleResult<String> result = new SingleResult<>(getName(), extract);
+            T extract = getContents().remove(0);
+            SingleResult<T> result = new SingleResult<>(getName(), extract);
         }
         return retVal;
     }
