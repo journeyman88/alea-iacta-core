@@ -48,11 +48,16 @@ public class ListSystemsCommand extends BasicCommand
         MsgBuilder output = new MsgBuilder();
         List<RpgSystemDescriptor> desc = new ArrayList<>();
         int nameL = 0;
+        int linkL = 0;
         for (RpgSystemCommand cmd : RpgSystemCommand.LOADER)
         {
             if (nameL < cmd.getCommandDesc().getSystem().length())
             {
                 nameL = cmd.getCommandDesc().getSystem().length();
+            }
+            if (linkL < cmd.getCommandDesc().getShortcut().length())
+            {
+                linkL = cmd.getCommandDesc().getShortcut().length();
             }
             desc.add(cmd.getCommandDesc());
         }
@@ -64,7 +69,7 @@ public class ListSystemsCommand extends BasicCommand
         for (RpgSystemDescriptor d : desc)
         {
             sb.append(" + ").append(StringUtils.rightPad(d.getSystem(), nameL))
-                    .append(" [ ").append(d.getShortcut()).
+                    .append(" [ ").append(StringUtils.rightPad(d.getShortcut(), linkL)).
                     append(" | ").append(d.getCommand()).append(" ]\n");
         }
         output.append(sb.toString(), MsgStyle.CODE);
