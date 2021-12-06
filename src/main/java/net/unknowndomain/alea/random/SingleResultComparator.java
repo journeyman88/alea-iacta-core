@@ -40,7 +40,7 @@ public class SingleResultComparator<T extends Comparable> implements Comparator<
     @Override
     public int compare(SingleResult<T> o1, SingleResult<T> o2)
     {
-        return (desc?-1:1) * o1.getValue().compareTo(o2);
+        return (desc?-1:1) * o1.getValue().compareTo(o2.getValue());
     }
     
 }
