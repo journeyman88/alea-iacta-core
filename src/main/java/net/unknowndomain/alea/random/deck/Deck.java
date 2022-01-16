@@ -40,6 +40,7 @@ public abstract class Deck<T> implements Generator<T>
             Collections.shuffle(getContents());
             T extract = getContents().remove(0);
             SingleResult<T> result = new SingleResult<>(getName(), extract);
+            retVal = Optional.ofNullable(result);
         }
         return retVal;
     }
