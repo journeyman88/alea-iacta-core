@@ -18,8 +18,6 @@ package net.unknowndomain.alea.random.dice;
 import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 import net.unknowndomain.alea.random.Generator;
-import net.unknowndomain.alea.random.Generator;
-import net.unknowndomain.alea.random.SingleResult;
 import net.unknowndomain.alea.random.SingleResult;
 
 /**

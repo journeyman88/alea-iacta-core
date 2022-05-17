@@ -21,6 +21,7 @@ import java.net.URL;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
+import net.unknowndomain.alea.icon.AleaIcon;
 
 /**
  * This class is used to build a ReturnMsg.
@@ -123,6 +124,33 @@ public class MsgBuilder
     public MsgBuilder appendUrl(String url) throws MalformedURLException
     {
         MsgUrlPart part = new MsgUrlPart(url);
+        parts.add(part);
+        return this;
+    }
+    
+    /**
+     * Add an Icon to the builder state.
+     * 
+     * @param icon the Icon to add.
+     * @return this MsgBuilder
+     */
+    public MsgBuilder appendIcon(AleaIcon icon)
+    {
+        MsgIconPart part = new MsgIconPart(icon);
+        parts.add(part);
+        return this;
+    }
+    
+    /**
+     * Add an Icon to the builder state.
+     * 
+     * @param namespace the namespace where the icon is located.
+     * @param iconId the ID of the icon in the namespace.
+     * @return this MsgBuilder
+     */
+    public MsgBuilder appendIcon(String namespace, String iconId)
+    {
+        MsgIconPart part = new MsgIconPart(namespace, iconId);
         parts.add(part);
         return this;
     }
