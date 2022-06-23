@@ -15,6 +15,7 @@
  */
 package net.unknowndomain.alea.roll;
 
+import java.io.Serializable;
 import java.util.UUID;
 import net.unknowndomain.alea.messages.MsgBuilder;
 import net.unknowndomain.alea.messages.ReturnMsg;
@@ -26,7 +27,7 @@ import net.unknowndomain.alea.command.PrintableOutput;
  * 
  * @author journeyman
  */
-public abstract class GenericResult implements PrintableOutput
+public abstract class GenericResult implements PrintableOutput, Serializable
 {
     private boolean verbose;
     private final String uuid = UUID.randomUUID().toString();

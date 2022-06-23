@@ -28,6 +28,8 @@ import javax.cache.expiry.ModifiedExpiryPolicy;
 import javax.cache.spi.CachingProvider;
 import net.unknowndomain.alea.roll.GenericResult;
 import net.unknowndomain.alea.systems.RpgSystemCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *
@@ -35,13 +37,22 @@ import net.unknowndomain.alea.systems.RpgSystemCommand;
  */
 public class CacheHelper {
     
+    private static final Logger LOGGER = LoggerFactory.getLogger(CacheHelper.class);
     private static final String RPG_CACHE_NAME = RpgSystemCommand.class.getName() + "_" + UUID.randomUUID().toString();
     
     public static Cache<UUID, GenericResult> getRpgCache()
     {
         CachingProvider cachingProvider = Caching.getCachingProvider();
         CacheManager cacheManager = cachingProvider.getCacheManager();
-        Cache<UUID, GenericResult> systemCache = cacheManager.getCache(RPG_CACHE_NAME, UUID.class, GenericResult.class);
+        Cache<UUID, GenericResult> systemCache = null;
+        try{
+            systemCache = cacheManager.getCache(RPG_CACHE_NAME);
+        }
+        catch(ClassCastException ce)
+        {
+            LOGGER.warn(null, ce);
+            systemCache = null;
+        }
         if (systemCache == null)
         {
             systemCache = setupCache(getDefaultConfig());

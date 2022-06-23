@@ -15,13 +15,14 @@
  */
 package net.unknowndomain.alea.random;
 
+import java.io.Serializable;
 import java.util.UUID;
 
 /**
  *
  * @author journeyman
  */
-public class SingleResult<T>
+public class SingleResult<T> implements Serializable
 {
     private final String id;
     private final String label;
