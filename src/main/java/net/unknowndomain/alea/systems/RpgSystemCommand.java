@@ -19,13 +19,11 @@ import java.util.Locale;
 import java.util.Optional;
 import java.util.ServiceLoader;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
+import net.unknowndomain.alea.cache.CacheHelper;
 import net.unknowndomain.alea.command.Command;
 import net.unknowndomain.alea.roll.GenericResult;
 import net.unknowndomain.alea.roll.GenericRoll;
 import net.unknowndomain.alea.roll.StatefulRoll;
-import org.cache2k.Cache;
-import org.cache2k.Cache2kBuilder;
 import org.slf4j.Logger;
 
 /**
@@ -40,10 +38,6 @@ public abstract class RpgSystemCommand extends Command
      * This is the service loader used to access the pluggable-RPGs specific implementations.
      */
     public static final ServiceLoader<RpgSystemCommand> LOADER = ServiceLoader.load(RpgSystemCommand.class);
-    
-    private static final Cache<UUID, GenericResult> RESULT_CACHE = new Cache2kBuilder<UUID, GenericResult>() {}
-            .expireAfterWrite(2, TimeUnit.MINUTES)
-            .build();
     
     
     @Override
@@ -111,10 +105,7 @@ public abstract class RpgSystemCommand extends Command
                 if (callerId.isPresent())
                 {
                     UUID id = callerId.get();
-                    if (RESULT_CACHE.containsKey(id))
-                    {
-                        result = RESULT_CACHE.peek(id);
-                    }
+                    result = CacheHelper.getRpgCache().get(id);
                 }
                 if ((roll instanceof StatefulRoll) && (result != null))
                 {
@@ -129,7 +120,7 @@ public abstract class RpgSystemCommand extends Command
                 if (callerId.isPresent())
                 {
                     UUID id = callerId.get();
-                    RESULT_CACHE.put(id, result);
+                    CacheHelper.getRpgCache().put(id, result);
                 }
                 retVal = Optional.ofNullable(result);
             }
