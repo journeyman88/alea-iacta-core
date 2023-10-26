@@ -35,7 +35,7 @@ public class LowerPart extends DicePart
     public LowerPart(String exp)
     {
         super(exp);
-        Matcher m = PATTERN.matcher(exp);
+        var m = PATTERN.matcher(exp);
         m.find();
         threshold = Integer.parseInt(m.group("threshold"));
     }
@@ -43,10 +43,10 @@ public class LowerPart extends DicePart
     @Override
     public PartResult getResult()
     {
-        SuccessResult res = new SuccessResult();
+        var res = new SuccessResult();
         res.setExpr(getExpr());
-        int sum = 0;
-        for (SingleResult<Integer> rs : dicePool.getResults())
+        var sum = 0;
+        for (var rs : dicePool.getResults())
         {
             if (rs.getValue() <= threshold)
             {

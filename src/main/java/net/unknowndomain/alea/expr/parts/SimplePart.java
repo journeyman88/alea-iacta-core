@@ -33,10 +33,10 @@ public class SimplePart extends DicePart
     @Override
     public PartResult getResult()
     {
-        DiceResult res = new DiceResult();
+        var res = new DiceResult();
         res.setExpr(getExpr());
-        int sum = 0;
-        for (SingleResult<Integer> rs : dicePool.getResults())
+        var sum = 0;
+        for (var rs : dicePool.getResults())
         {
             sum += rs.getValue();
             res.getResults().add(rs);

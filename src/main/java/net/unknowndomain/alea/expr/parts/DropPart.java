@@ -35,7 +35,7 @@ public class DropPart extends DicePart
     public DropPart(String exp)
     {
         super(exp);
-        Matcher m = PATTERN.matcher(exp);
+        var m = PATTERN.matcher(exp);
         m.find();
         maxDice = Integer.parseInt(m.group("drop"));
     }
@@ -43,18 +43,18 @@ public class DropPart extends DicePart
     @Override
     public PartResult getResult()
     {
-        int sum = 0;
-        SuccessResult res = new SuccessResult();
+        var sum = 0;
+        var res = new SuccessResult();
         res.setExpr(getExpr());
-        List<SingleResult<Integer>> results = dicePool.getResults();
+        var results = dicePool.getResults();
         results.sort((SingleResult<Integer> o1, SingleResult<Integer> o2) ->
         {
             return o1.getValue().compareTo(o2.getValue());
         });
-        int limit = (maxDice > results.size()) ? results.size() : maxDice;
-        for (int idx = 0; idx < results.size(); idx++)
+        var limit = (maxDice > results.size()) ? results.size() : maxDice;
+        for (var idx = 0; idx < results.size(); idx++)
         {
-            SingleResult<Integer> tmp = results.get(idx);
+            var tmp = results.get(idx);
             if (idx < limit)
             {
                 sum += tmp.getValue();

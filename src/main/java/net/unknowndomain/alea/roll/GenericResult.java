@@ -40,7 +40,7 @@ public abstract class GenericResult implements PrintableOutput, Serializable
     @Override
     public ReturnMsg buildMessage()
     {
-        MsgBuilder msg = new MsgBuilder();
+        var msg = new MsgBuilder();
         formatResults(msg, verbose, 0);
         return msg.build();
     }

@@ -45,11 +45,11 @@ public class ListSystemsCommand extends BasicCommand
     @Override
     public Optional<PrintableOutput> execCommand(String cmdLine, Optional<UUID> callerId)
     {
-        MsgBuilder output = new MsgBuilder();
+        var output = new MsgBuilder();
         List<RpgSystemDescriptor> desc = new ArrayList<>();
-        int nameL = 0;
-        int linkL = 0;
-        for (RpgSystemCommand cmd : RpgSystemCommand.LOADER)
+        var nameL = 0;
+        var linkL = 0;
+        for (var cmd : RpgSystemCommand.LOADER)
         {
             if (nameL < cmd.getCommandDesc().getSystem().length())
             {
@@ -65,8 +65,8 @@ public class ListSystemsCommand extends BasicCommand
         {
             return o1.getSystem().compareToIgnoreCase(o2.getSystem());
         });
-        StringBuilder sb = new StringBuilder("Available systems:\n");
-        for (RpgSystemDescriptor d : desc)
+        var sb = new StringBuilder("Available systems:\n");
+        for (var d : desc)
         {
             sb.append(" + ").append(StringUtils.rightPad(d.getSystem(), nameL))
                     .append(" [ ").append(StringUtils.rightPad(d.getShortcut(), linkL)).
@@ -79,7 +79,7 @@ public class ListSystemsCommand extends BasicCommand
     @Override
     public ReturnMsg printHelp(Locale lang)
     {
-        MsgBuilder msgBuilder = new MsgBuilder();
+        var msgBuilder = new MsgBuilder();
         return msgBuilder.build();
     }
     

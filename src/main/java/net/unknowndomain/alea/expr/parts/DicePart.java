@@ -33,15 +33,15 @@ public abstract class DicePart extends ExpPart
     public DicePart(String exp)
     {
         super(exp);
-        Matcher m = PATTERN.matcher(exp);
+        var m = PATTERN.matcher(exp);
         m.find();
-        Integer diceNumber = Integer.parseInt(m.group("number"));
-        String c = m.group("class");
+        var diceNumber = Integer.valueOf(m.group("number"));
+        var c = m.group("class");
         if (c.startsWith("D"))
         {
             c = "d" + c.substring(1);
         }
-        DiceN dice = DiceBuilder.parseDice(c);
+        var dice = DiceBuilder.parseDice(c);
         dicePool = new DicePool<>(dice, diceNumber);
     }
     

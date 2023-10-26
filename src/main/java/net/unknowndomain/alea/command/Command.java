@@ -68,7 +68,7 @@ public abstract class Command
      */
     public boolean checkCommand(String cmdLine)
     {
-        Matcher matcher = PREFIX.matcher(cmdLine);
+        var matcher = PREFIX.matcher(cmdLine);
         return matcher.matches();
     }
     

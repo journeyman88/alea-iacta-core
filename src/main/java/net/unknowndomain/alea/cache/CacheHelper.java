@@ -42,8 +42,8 @@ public class CacheHelper {
     
     public static Cache<UUID, GenericResult> getRpgCache()
     {
-        CachingProvider cachingProvider = Caching.getCachingProvider();
-        CacheManager cacheManager = cachingProvider.getCacheManager();
+        var cachingProvider = Caching.getCachingProvider();
+        var cacheManager = cachingProvider.getCacheManager();
         Cache<UUID, GenericResult> systemCache = null;
         try{
             systemCache = cacheManager.getCache(RPG_CACHE_NAME);
@@ -62,14 +62,14 @@ public class CacheHelper {
     
     public static Cache<UUID, GenericResult> setupCache(CompleteConfiguration<UUID, GenericResult> config)
     {
-        CachingProvider cachingProvider = Caching.getCachingProvider();
-        CacheManager cacheManager = cachingProvider.getCacheManager();
+        var cachingProvider = Caching.getCachingProvider();
+        var cacheManager = cachingProvider.getCacheManager();
         return cacheManager.createCache(RPG_CACHE_NAME, config);
     }
     
     public static CompleteConfiguration<UUID, GenericResult> getDefaultConfig()
     {
-        MutableConfiguration<UUID, GenericResult> config = new MutableConfiguration<>();
+        var config = new MutableConfiguration<UUID, GenericResult>();
         config.setExpiryPolicyFactory(FactoryBuilder.factoryOf(new ModifiedExpiryPolicy(new Duration( TimeUnit.MINUTES, 2 ))));
         return config;
     }

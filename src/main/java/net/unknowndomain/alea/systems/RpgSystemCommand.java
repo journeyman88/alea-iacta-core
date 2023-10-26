@@ -97,20 +97,20 @@ public abstract class RpgSystemCommand extends Command
         Optional<GenericResult> retVal = Optional.empty();
         if (options.isValid())
         {
-            Optional<GenericRoll> parsedRoll = safeCommand(options, lang);
+            var parsedRoll = safeCommand(options, lang);
             if (parsedRoll.isPresent())
             {
-                GenericRoll roll = parsedRoll.get();
+                var roll = parsedRoll.get();
                 GenericResult result = null;
                 if (callerId.isPresent())
                 {
-                    UUID id = callerId.get();
+                    var id = callerId.get();
                     result = CacheHelper.getRpgCache().get(id);
                 }
                 if ((roll instanceof StatefulRoll) && (result != null))
                 {
-                    StatefulRoll stateFul = (StatefulRoll) roll;
-                    boolean chkLoad = stateFul.loadState(result);
+                    var stateFul = (StatefulRoll) roll;
+                    var chkLoad = stateFul.loadState(result);
                     if (!chkLoad)
                     {
                         return retVal;
@@ -119,7 +119,7 @@ public abstract class RpgSystemCommand extends Command
                 result = roll.getResult();
                 if (callerId.isPresent())
                 {
-                    UUID id = callerId.get();
+                    var id = callerId.get();
                     CacheHelper.getRpgCache().put(id, result);
                 }
                 retVal = Optional.ofNullable(result);

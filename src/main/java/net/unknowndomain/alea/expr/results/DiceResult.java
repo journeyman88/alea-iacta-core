@@ -32,16 +32,16 @@ public class DiceResult extends PartResult
     @Override
     public void formatVerbose(MsgBuilder msgBuilder)
     {
-        boolean v = !getResults().isEmpty();
+        var v = !getResults().isEmpty();
         if (v)
         {
             msgBuilder.append(getExpr());
             msgBuilder.append(" => ");
-            boolean first = true;
+            var first = true;
             msgBuilder.append("(");
             if (v)
             {
-                for (SingleResult<Integer> roll : getResults())
+                for (var roll : getResults())
                 {
                     if (first)
                     {

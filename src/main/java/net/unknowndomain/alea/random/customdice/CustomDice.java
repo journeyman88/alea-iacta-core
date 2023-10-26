@@ -36,8 +36,8 @@ public abstract class CustomDice <T extends Object> implements Generator<List<T>
     @Override
     public Optional<SingleResult<List<T>>> nextResult()
     {
-        int result = ThreadLocalRandom.current().nextInt(getFaces().size());
-        SingleResult<List<T>> retVal = new SingleResult<>(getName(), getFaces().get(result).getFaceValues());
+        var result = ThreadLocalRandom.current().nextInt(getFaces().size());
+        var retVal = new SingleResult<List<T>>(getName(), getFaces().get(result).getFaceValues());
         return Optional.of(retVal);
     }
     

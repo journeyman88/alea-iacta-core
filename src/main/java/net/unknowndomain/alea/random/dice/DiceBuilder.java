@@ -90,7 +90,7 @@ public class DiceBuilder
         {
             return REGISTRY.get(dX);
         }
-        int x = Integer.parseInt(dX.replaceAll("d", ""));
+        var x = Integer.parseInt(dX.replaceAll("d", ""));
         return new DiceN()
         {
             @Override
@@ -123,7 +123,7 @@ public class DiceBuilder
      */
     public static final DiceN parseDice(Integer X)
     {
-        String dX = "d" + X;
+        var dX = "d" + X;
         return parseDice(dX);
     }
 }

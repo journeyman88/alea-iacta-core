@@ -18,7 +18,6 @@ package net.unknowndomain.alea.expr;
 import java.util.Locale;
 import java.util.Optional;
 import java.util.UUID;
-import java.util.regex.Matcher;
 import net.unknowndomain.alea.command.BasicCommand;
 import net.unknowndomain.alea.command.PrintableOutput;
 import net.unknowndomain.alea.messages.MsgBuilder;
@@ -42,20 +41,20 @@ public class ExpressionCommand extends BasicCommand
     public Optional<PrintableOutput> execCommand(String cmdLine, Optional<UUID> callerId)
     {
         Optional<PrintableOutput> retVal = Optional.empty();
-        Matcher prefixMatcher = PREFIX.matcher(cmdLine);
+        var prefixMatcher = PREFIX.matcher(cmdLine);
         if (prefixMatcher.matches())
         {
             if (!(cmdLine.contains(CMD_HELP) || cmdLine.contains("-h")))
             {
-                boolean verbose = false;
-                String params = prefixMatcher.group(CMD_PARAMS);
+                var verbose = false;
+                var params = prefixMatcher.group(CMD_PARAMS);
                 if (cmdLine.contains("-v"))
                 {
                     verbose = true;
                     params = params.replaceAll("-v", "");
                 }
-                Expression solver = new Expression(params);
-                ExpressionResult result = solver.getResult();
+                var solver = new Expression(params);
+                var result = solver.getResult();
                 result.setVerbose(verbose);
                 retVal = Optional.of(result);
             }
@@ -66,9 +65,9 @@ public class ExpressionCommand extends BasicCommand
     @Override
     public ReturnMsg printHelp(Locale lang)
     {
-        MsgBuilder retVal = new MsgBuilder();
+        var retVal = new MsgBuilder();
         retVal.append("Expression Engine (expr) Help", MsgStyle.BOLD, MsgStyle.UNDERLINE).append("\n").append("\n");
-        StringBuilder sb = new StringBuilder();
+        var sb = new StringBuilder();
         
         sb.append("The expr command performs and solves a simple set of addition/subtraction operations using the following dice annotation").append("\n");
         sb.append(" * NdX: roll N dice with X faces and sum them (es: 2d12)").append("\n");

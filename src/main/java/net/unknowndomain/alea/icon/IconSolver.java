@@ -32,7 +32,7 @@ public abstract class IconSolver
     
     public static Optional<AleaImage> loadIcon(AleaIcon icon)
     {
-        for(IconSolver solver : LOADER)
+        for(var solver : LOADER)
         {
             if (solver.checkNamespace(icon.getNamespace()))
             {

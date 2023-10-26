@@ -66,7 +66,7 @@ public class MsgBuilder
      */
     public MsgBuilder append(String msg, MsgStyle ... styles)
     {
-        MsgTextPart part = new MsgTextPart(msg, styles);
+        var part = new MsgTextPart(msg, styles);
         parts.add(part);
         return this;
     }
@@ -80,7 +80,7 @@ public class MsgBuilder
      */
     public MsgBuilder appendFile(byte [] data, String fileName)
     {
-        MsgFilePart part = new MsgFilePart(data, fileName);
+        var part = new MsgFilePart(data, fileName);
         parts.add(part);
         return this;
     }
@@ -94,7 +94,7 @@ public class MsgBuilder
      */
     public MsgBuilder appendUrl(URL url)
     {
-        MsgUrlPart part = new MsgUrlPart(url);
+        var part = new MsgUrlPart(url);
         parts.add(part);
         return this;
     }
@@ -109,7 +109,7 @@ public class MsgBuilder
      */
     public MsgBuilder appendFile(Path file) throws IOException
     {
-        MsgFilePart part = new MsgFilePart(file);
+        var part = new MsgFilePart(file);
         parts.add(part);
         return this;
     }
@@ -123,7 +123,7 @@ public class MsgBuilder
      */
     public MsgBuilder appendUrl(String url) throws MalformedURLException
     {
-        MsgUrlPart part = new MsgUrlPart(url);
+        var part = new MsgUrlPart(url);
         parts.add(part);
         return this;
     }
@@ -136,7 +136,7 @@ public class MsgBuilder
      */
     public MsgBuilder appendIcon(AleaIcon icon)
     {
-        MsgIconPart part = new MsgIconPart(icon);
+        var part = new MsgIconPart(icon);
         parts.add(part);
         return this;
     }
@@ -150,7 +150,7 @@ public class MsgBuilder
      */
     public MsgBuilder appendIcon(String namespace, String iconId)
     {
-        MsgIconPart part = new MsgIconPart(namespace, iconId);
+        var part = new MsgIconPart(namespace, iconId);
         parts.add(part);
         return this;
     }

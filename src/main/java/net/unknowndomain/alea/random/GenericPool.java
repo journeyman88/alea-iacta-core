@@ -80,14 +80,14 @@ public class GenericPool<T extends Generator<V>, V>
     public List<SingleResult<V>> getResults()
     {
         List<SingleResult<V>> results = new LinkedList<>();
-        int idx = 0;
+        var idx = 0;
         while(idx < numberOfDice)
         {
             idx++;
-            Optional<SingleResult<V>> result = diceClass.nextResult();
+            var result = diceClass.nextResult();
             if (result.isPresent())
             {
-                SingleResult<V> res = result.get();
+                var res = result.get();
                 if (explodingValues.contains(res.getValue()))
                 {
                     idx--;

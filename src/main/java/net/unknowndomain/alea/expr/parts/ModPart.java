@@ -36,7 +36,7 @@ public class ModPart extends ExpPart
     @Override
     public PartResult getResult()
     {
-        PlainResult res = new PlainResult();
+        var res = new PlainResult();
         res.setExpr(getExpr());
         res.setResult(modifier);
         return res;

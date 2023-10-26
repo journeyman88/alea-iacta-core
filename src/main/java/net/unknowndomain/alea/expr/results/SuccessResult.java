@@ -33,17 +33,17 @@ public class SuccessResult extends PartResult
     @Override
     public void formatVerbose(MsgBuilder msgBuilder)
     {
-        boolean v = !getValidResults().isEmpty();
-        boolean d = !getDiscardedResults().isEmpty();
+        var v = !getValidResults().isEmpty();
+        var d = !getDiscardedResults().isEmpty();
         if (v || d)
         {
             msgBuilder.append(getExpr());
             msgBuilder.append(" => ");
-            boolean first = true;
+            var first = true;
             msgBuilder.append("(");
             if (v)
             {
-                for (SingleResult<Integer> roll : getValidResults())
+                for (var roll : getValidResults())
                 {
                     if (first)
                     {
@@ -58,7 +58,7 @@ public class SuccessResult extends PartResult
             }
             if (d)
             {
-                for (SingleResult<Integer> roll : getDiscardedResults())
+                for (var roll : getDiscardedResults())
                 {
                     if (first)
                     {

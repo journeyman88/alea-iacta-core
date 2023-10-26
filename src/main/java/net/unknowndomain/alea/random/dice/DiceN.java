@@ -51,9 +51,9 @@ public abstract class DiceN implements Generator<Integer>
     @Override
     public Optional<SingleResult<Integer>> nextResult()
     {
-        int result = ThreadLocalRandom.current().nextInt(getMaxResult());
+        var result = ThreadLocalRandom.current().nextInt(getMaxResult());
         result += getMinResult();
-        SingleResult<Integer> retVal = new SingleResult<>(getName(), result);
+        var retVal = new SingleResult<Integer>(getName(), result);
         return Optional.of(retVal);
     }
 }

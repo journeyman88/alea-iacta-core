@@ -41,9 +41,9 @@ public class ExpressionResult implements PrintableOutput
     @Override
     public ReturnMsg buildMessage()
     {
-        MsgBuilder retVal = new MsgBuilder();
-        int total = 0;
-        for (PartResult res : results)
+        var retVal = new MsgBuilder();
+        var total = 0;
+        for (var res : results)
         {
             total += res.getResult();
         }
@@ -51,7 +51,7 @@ public class ExpressionResult implements PrintableOutput
         if (verbose)
         {
             retVal.appendNewLine();
-            for (PartResult res : results)
+            for (var res : results)
             {
                 res.formatVerbose(retVal);
             }

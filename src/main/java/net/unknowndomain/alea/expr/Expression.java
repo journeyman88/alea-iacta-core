@@ -27,6 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import static java.util.regex.Pattern.compile;
 
 /**
  *
@@ -34,58 +35,58 @@ import java.util.regex.Pattern;
  */
 public class Expression
 {
-    private static final Pattern KEEP_PATTERN = Pattern.compile("(?<keep>(\\+|-?)\\d+(d|D)(\\d+|F)(k|K)\\d+)");
-    private static final Pattern DROP_PATTERN = Pattern.compile("(?<drop>(\\+|-?)\\d+(d|D)(\\d+|F)(l|L)\\d+)");
-    private static final Pattern UPPER_PATTERN = Pattern.compile("(?<upper>(\\+|-?)\\d+(d|D)(\\d+|F)\\/\\d+)");
-    private static final Pattern LOWER_PATTERN = Pattern.compile("(?<lower>(\\+|-?)\\d+(d|D)(\\d+|F)\\\\\\d+)");
-    private static final Pattern DICE_PATTERN = Pattern.compile("(?<dice>(\\+|-?)\\d+(d|D)(\\d+|F))");
-    private static final Pattern MOD_PATTERN = Pattern.compile("(?<mod>(\\+|-?)\\d+)");
+    private static final Pattern KEEP_PATTERN = compile("(?<keep>(\\+|-?)\\d+(d|D)(\\d+|F)(k|K)\\d+)");
+    private static final Pattern DROP_PATTERN = compile("(?<drop>(\\+|-?)\\d+(d|D)(\\d+|F)(l|L)\\d+)");
+    private static final Pattern UPPER_PATTERN = compile("(?<upper>(\\+|-?)\\d+(d|D)(\\d+|F)\\/\\d+)");
+    private static final Pattern LOWER_PATTERN = compile("(?<lower>(\\+|-?)\\d+(d|D)(\\d+|F)\\\\\\d+)");
+    private static final Pattern DICE_PATTERN = compile("(?<dice>(\\+|-?)\\d+(d|D)(\\d+|F))");
+    private static final Pattern MOD_PATTERN = compile("(?<mod>(\\+|-?)\\d+)");
     
     private final List<ExpPart> parts = new ArrayList<>();
     
     public Expression(String input)
     {
-        String expr = input.replaceAll(" ", "");
-        String modExpr = expr;
-        Matcher keepMatch = KEEP_PATTERN.matcher(modExpr);
+        var expr = input.replaceAll(" ", "");
+        var modExpr = expr;
+        var keepMatch = KEEP_PATTERN.matcher(modExpr);
         while(keepMatch.find())
         {
-            String keepEx = keepMatch.group("keep");
+            var keepEx = keepMatch.group("keep");
             parts.add(new KeepPart(keepEx));
         }
         modExpr = keepMatch.replaceAll("");
-        Matcher dropMatch = DROP_PATTERN.matcher(modExpr);
+        var dropMatch = DROP_PATTERN.matcher(modExpr);
         while(dropMatch.find())
         {
-            String keepEx = dropMatch.group("drop");
+            var keepEx = dropMatch.group("drop");
             parts.add(new DropPart(keepEx));
         }
         modExpr = dropMatch.replaceAll("");
-        Matcher upprMatch = UPPER_PATTERN.matcher(modExpr);
+        var upprMatch = UPPER_PATTERN.matcher(modExpr);
         while(upprMatch.find())
         {
-            String upprEx = upprMatch.group("upper");
+            var upprEx = upprMatch.group("upper");
             parts.add(new UpperPart(upprEx));
         }
         modExpr = upprMatch.replaceAll("");
-        Matcher lowrMatch = LOWER_PATTERN.matcher(modExpr);
+        var lowrMatch = LOWER_PATTERN.matcher(modExpr);
         while(lowrMatch.find())
         {
-            String lowrEx = lowrMatch.group("lower");
+            var lowrEx = lowrMatch.group("lower");
             parts.add(new LowerPart(lowrEx));
         }
         modExpr = lowrMatch.replaceAll("");
-        Matcher diceMatch = DICE_PATTERN.matcher(modExpr);
+        var diceMatch = DICE_PATTERN.matcher(modExpr);
         while(diceMatch.find())
         {
-            String diceEx = diceMatch.group("dice");
+            var diceEx = diceMatch.group("dice");
             parts.add(new SimplePart(diceEx));
         }
         modExpr = diceMatch.replaceAll("");
-        Matcher modMatch = MOD_PATTERN.matcher(modExpr);
+        var modMatch = MOD_PATTERN.matcher(modExpr);
         while(modMatch.find())
         {
-            String modEx = modMatch.group("mod");
+            var modEx = modMatch.group("mod");
             parts.add(new ModPart(modEx));
         }
     }
@@ -97,8 +98,8 @@ public class Expression
     
     public String getExpression()
     {
-        StringBuilder sb = new StringBuilder();
-        for (ExpPart p : parts)
+        var sb = new StringBuilder();
+        for (var p : parts)
         {
             sb.append(p.getExpr());
         }
@@ -108,7 +109,7 @@ public class Expression
     public List<PartResult> getResults()
     {
         List<PartResult> result = new ArrayList<>(parts.size());
-        for (ExpPart p : parts)
+        for (var p : parts)
         {
             result.add(p.getResult());
         }

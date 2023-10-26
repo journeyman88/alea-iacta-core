@@ -38,8 +38,8 @@ public abstract class Deck<T> implements Generator<T>
         if (!getContents().isEmpty())
         {
             Collections.shuffle(getContents());
-            T extract = getContents().remove(0);
-            SingleResult<T> result = new SingleResult<>(getName(), extract);
+            var extract = getContents().remove(0);
+            var result = new SingleResult<T>(getName(), extract);
             retVal = Optional.ofNullable(result);
         }
         return retVal;
